@@ -1,0 +1,19 @@
+//SERVER SYSTEM
+sudo apt update && sudo apt install ntp
+sudo nano /etc/ntp.conf
+restrict <System_B_IP> nomodify notrap nopeer noquery
+sudo systemctl restart ntp
+sudo systemctl enable ntp
+ntpq -p
+
+
+
+//CLIENT SYSTEM
+sudo apt update
+sudo apt install ntpdate
+sudo ntpdate <System_A_IP>
+sudo ntpdate 192.168.1.100
+date
+sudo crontab -e
+0 * * * * /usr/sbin/ntpdate <System_A_IP>   ****FOR EVERY HOUR SYNC....
+
